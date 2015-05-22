@@ -13,8 +13,8 @@ import java.util.List;
 @Table(name="tb_order")
 public class Order {
 
-    private final int OPEN = 0;
-    private final int CLOSED = 1;
+    private static final int OPEN = 0;
+    private static final int CLOSED = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,6 +49,10 @@ public class Order {
 
     public Date getCreationTime() {
         return creationTime;
+    }
+    
+    public void setCreationTime(Date creationTime) {
+    	this.creationTime = creationTime;
     }
 
     public Customer getCustomer() {

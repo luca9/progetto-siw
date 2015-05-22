@@ -93,6 +93,15 @@ public class Customer {
         this.orders.add(order);
         return true;
     }
+    
+    public Order getOrder(Long id) {
+    	int i = id.intValue();
+    	return this.orders.get(i);
+    }
+    
+    public List<Order> getOrders() {
+    	return this.orders;
+    }
 
 
 
