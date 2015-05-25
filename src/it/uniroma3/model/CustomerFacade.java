@@ -24,7 +24,7 @@ public class CustomerFacade {
 		Float unitPrice = product.getPrice();
 		OrderLine orderLine = new OrderLine(unitPrice, quantity, product);
 		order.addOrderLine(orderLine);
-		em.persist(orderLine);
+		em.persist(order);
 	}
 	
 	
