@@ -3,7 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<>
 <head>
     <title>Product confirm</title>
 </head>
@@ -17,8 +16,8 @@
 <div>Price: #{productController.product.price}</div>
 <br/>
 <h2>Confirm?</h2>
-<input type="checkbox" name="yes" value="Yes"> Yes </input>
-<input type="checkbox" name="no" value="No">  </input>
-<input type="submit" name="submit" value="invia"> Submit </input>
+<input type="checkbox" name="yes" value="Yes"> Yes 
+<input type="checkbox" name="no" value="No">  
+<input type="submit" name="submit" value="invia"> Submit 
 </body>
 </html>

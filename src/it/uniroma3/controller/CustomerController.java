@@ -1,12 +1,14 @@
 package it.uniroma3.controller;
 
-import java.util.Date;
-import java.util.List;
-
 import it.uniroma3.model.Address;
 import it.uniroma3.model.Customer;
+import it.uniroma3.model.CustomerFacade;
 import it.uniroma3.model.Order;
+import it.uniroma3.model.OrderFacade;
+import it.uniroma3.model.OrderLine;
 
+import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -27,17 +29,49 @@ public class CustomerController {
     private List<Customer> customers;
     private List<Order> orders;
     private Order order;
+    private OrderLine orderLine;
     private Address address;
+    private int quantity;
+    private long idOrder;
+    private long idProduct;    
 
     @EJB
+    private OrderFacade orderFacade;
+    private CustomerFacade customerFacade;
+    
+    public String createOrder() {
+    	this.order = customerFacade.createOrder();
+    	return "order";
+    }
+    
+    public String addOrderLine() throws Exception {
+		this.orderLine = customerFacade.aggiungiOrderLine(quantity, idOrder, idProduct);
+		return "orderLine"; 
+    }
      
-    public String listOrders() {
+    public OrderLine getOrderLine() {
+		return orderLine;
+	}
+
+	public void setOrderLine(OrderLine orderLine) {
+		this.orderLine = orderLine;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String listOrders() {
     	this.orders = this.customer.getOrders();
     	return "orders";
     }
     
     public String findOrder(Long id) {
-    	this.order = this.customer.getOrder(id);
+    	this.order = this.orderFacade.getOrder(id);
     	return "order";
     }
 

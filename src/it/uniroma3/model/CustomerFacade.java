@@ -18,13 +18,14 @@ public class CustomerFacade {
 		return order;
 	}
 	
-	public void aggiungiOrderLine(int quantity,Long idOrder, long idProduct) throws Exception {
+	public OrderLine aggiungiOrderLine(int quantity, long idOrder, long idProduct) throws Exception {
 		Order order = em.find(Order.class,idOrder);
 		Product product = em.find(Product.class, idProduct);
 		Float unitPrice = product.getPrice();
 		OrderLine orderLine = new OrderLine(unitPrice, quantity, product);
 		order.addOrderLine(orderLine);
 		em.persist(order);
+		return orderLine;
 	}
 	
 	
