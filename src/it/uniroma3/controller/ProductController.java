@@ -12,7 +12,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class ProductController {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 111L;
 
 	public ProductController(){
 	}
