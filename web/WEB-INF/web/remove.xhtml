@@ -83,7 +83,11 @@
 <f:view>
 <h:form>
 <label>ID:
- <f:validator validatorId="IDValidator"/>/>
+ <h:inputText value="#{productController.id}"
+               required="true"
+               requiredMessage="Insert ID"
+               id="id">
+               <f:validator validatorId="IDValidator"/></h:inputText>
 </label> <h:message for="id" style="color:red"/>
 
 
