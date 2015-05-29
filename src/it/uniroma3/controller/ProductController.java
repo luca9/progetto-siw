@@ -1,9 +1,9 @@
 package it.uniroma3.controller;
 
-import java.util.List;
-
+import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.model.Product;
-import it.uniroma3.model.ProductFacade;
+
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;

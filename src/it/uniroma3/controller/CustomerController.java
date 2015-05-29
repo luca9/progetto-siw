@@ -1,8 +1,8 @@
 package it.uniroma3.controller;
 
+import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.model.Address;
 import it.uniroma3.model.Customer;
-import it.uniroma3.model.CustomerFacade;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.OrderFacade;
 import it.uniroma3.model.OrderLine;
