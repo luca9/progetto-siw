@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - siwdb@localhost" uuid="8541ad82-115d-4eca-ae91-0dd2942c0f50">
+      <secret-storage>master_key</secret-storage>
+      <user-name>lorenzovalente</user-name>
+      <schema-pattern>siwdb.*</schema-pattern>
+      <default-schemas>siwdb.*</default-schemas>
+    </data-source>
+  </component>
+</project>

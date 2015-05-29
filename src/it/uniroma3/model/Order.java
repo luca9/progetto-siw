@@ -1,20 +1,19 @@
 package it.uniroma3.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import it.uniroma3.enums.OrderState;
 
 /**
  * Created by lorenzovalente on 27/03/15.
  */
 
 @Entity
-@Table(name="tb_order")
+@Table(name = "CustomerOrder")
 public class Order {
-
-    private static final int OPEN = 0;
-    private static final int CLOSED = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,24 +22,23 @@ public class Order {
     @Column(nullable = false)
     private Date creationTime;
 
+    private OrderState orderState;
+
     @ManyToOne
-    private Customer customer;
+    private RegisteredUser customer;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "orders_id")
     private List<OrderLine> orderLines;
 
-    private int state;
 
     public Order() {
         this.creationTime = Calendar.getInstance().getTime();
-        this.state = 0;
     }
 
-    public Order (Customer customer, List <OrderLine> orderLines) {
+    public Order (RegisteredUser customer) {
         this.creationTime = Calendar.getInstance().getTime();
         this.customer = customer;
-        this.orderLines = orderLines;
+        this.orderLines = new ArrayList<OrderLine>();
     }
 
     public Long getId () {
@@ -50,16 +48,32 @@ public class Order {
     public Date getCreationTime() {
         return creationTime;
     }
-    
-    public void setCreationTime(Date creationTime) {
-    	this.creationTime = creationTime;
+
+    public OrderState getOrderState() {
+        return orderState;
     }
 
-    public Customer getCustomer() {
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
+
+    public void placeOrder () {
+        this.setOrderState(OrderState.PLACED);
+    }
+
+    public void dispatchOrder () {
+        this.setOrderState(OrderState.DISPATCHED);
+    }
+
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(RegisteredUser customer) {
+        this.customer = customer;
+    }
+
+    public void setUser(User user) {
         this.customer = customer;
     }
 
@@ -71,18 +85,8 @@ public class Order {
         this.orderLines = orderLines;
     }
 
-    public int getState () { return this.state; }
-
-    public void setState (int state) {this.state = state;}
-
-    public void open () {this.setState(OPEN);}
-    public void close () {this.setState(CLOSED);}
-
-
     public void addOrderLine (OrderLine orderLine) {this.orderLines.add(orderLine);}
 
-    public boolean isOpen () { return this.getState() == OPEN;}
-    public boolean isClosed () { return this.getState() == CLOSED;}
 
     @Override
     public boolean equals(Object o) {
@@ -98,7 +102,6 @@ public class Order {
                 ", creationTime=" + creationTime +
                 ", customer=" + customer.getLastName() +
                 ", orderLines=" + orderLines +
-                ", state=" + state +
                 '}';
     }
 }
