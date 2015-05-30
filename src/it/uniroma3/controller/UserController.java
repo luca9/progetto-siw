@@ -3,7 +3,6 @@ package it.uniroma3.controller;
 import it.uniroma3.enums.UserGroup;
 import it.uniroma3.facade.UserFacade;
 import it.uniroma3.model.Address;
-import it.uniroma3.model.User;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -43,9 +42,9 @@ public class UserController {
 
 
     public String createUser() {
-        Address address = new Address();
-        this.userFacade.createUser (firstName, lastName, email,
-                phoneNumber, dateOfBirth, address, username, password);
+        Address address = new Address(country, street, city, state, zipCode);
+        this.userFacade.saveUser(username, password, firstName, lastName, email,
+                phoneNumber, dateOfBirth, address);
         return "confirmRegistration";
     }
 

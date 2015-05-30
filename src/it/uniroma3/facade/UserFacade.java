@@ -20,13 +20,12 @@ public class UserFacade {
     public UserFacade() {
     }
 
-    public User createUser
-            (String firstName, String lastName, String email,
-             String phoneNumber, Date dateOfBirth, Address address,
-             String username, String password) {
+    public RegisteredUser saveUser
+            (String username, String password, String firstName, String lastName, String email,
+             String phoneNumber, Date dateOfBirth, Address address) {
 
-        RegisteredUser user = new RegisteredUser(firstName, lastName, email,
-                phoneNumber, dateOfBirth, address, null, username, password);
+        RegisteredUser user = new RegisteredUser(username, password, firstName, lastName, email,
+                phoneNumber, dateOfBirth, address, null);
         em.persist(user);
         return user;
     }
