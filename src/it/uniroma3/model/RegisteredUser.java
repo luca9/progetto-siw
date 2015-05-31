@@ -45,4 +45,6 @@ public class RegisteredUser extends User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+    
+    
 }

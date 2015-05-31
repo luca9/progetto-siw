@@ -50,8 +50,8 @@ public class UserFacade {
             if (u.getPassword().equals(password)) user = u;
         return user;
     }
-
-    public void updateUser (User user) {
+    
+     public void updateUser (User user) {
         this.em.merge(user);
     }
 
