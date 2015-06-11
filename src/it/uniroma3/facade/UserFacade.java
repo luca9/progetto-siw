@@ -43,8 +43,8 @@ public class UserFacade {
     public User getUser (String username) {
         return em.find(User.class, username);
     }
-
-    public void updateUser (User user) {
+    
+     public void updateUser (User user) {
         this.em.merge(user);
     }
 
