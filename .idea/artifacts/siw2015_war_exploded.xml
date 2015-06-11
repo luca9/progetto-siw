@@ -8,6 +8,7 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="PrimeFaces-5.2" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="siw2015/web/Web" />

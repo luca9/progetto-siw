@@ -39,6 +39,9 @@ public class RegisteredUser extends User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-    
+
+    public void addOrder(Order o) {
+        this.orders.add(o);
+    }
     
 }

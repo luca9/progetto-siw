@@ -33,6 +33,9 @@ public class Order {
 	private Long id;
 
 	@Column(nullable = false)
+	public OrderState state;
+
+	@Column(nullable = false)
 	private Date creationTime;
 
 	private OrderState orderState;
@@ -113,6 +116,11 @@ public class Order {
 		}
 		a.setQuantity(a.getQuantity() + quantity);
 	}
+
+	public void close(){
+		this.closed = new Date();
+		this.state = OrderState.CLOSED;
+	}
 	
 	public Date getOpened() {
 		return opened;
@@ -129,6 +137,10 @@ public class Order {
     public void setClosed(Date closed) {
         this.closed = closed;
     }
+
+	public int getSize() {
+		return this.orderLines.size();
+	}
 
 	@Override
 	public boolean equals(Object o) {

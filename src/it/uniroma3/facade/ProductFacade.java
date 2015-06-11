@@ -34,6 +34,10 @@ public class ProductFacade {
 		return this.em.find(Product.class, id);
 	}
 
+	public Product getProduct(String code ) {
+		return this.em.find(Product.class, code );
+	}
+
 	public List<Product> getAllProducts() {
 		return this.em.createQuery("SELECT p FROM Product p",
 				Product.class).getResultList();
