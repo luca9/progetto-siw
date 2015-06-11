@@ -20,10 +20,7 @@ public class RegisteredUser extends User {
     @OneToMany
     private List<Order> orders;
 
-    private final UserGroup userGroup = UserGroup.USER;
-
-    public RegisteredUser() {
-    }
+    public RegisteredUser() {}
 
     public RegisteredUser
             (String username, String password, String firstName, String lastName, String email,
@@ -31,11 +28,8 @@ public class RegisteredUser extends User {
              List<Order> orders) {
 
         super(username, password, firstName, lastName, email, phoneNumber, dateOfBirth, address);
+        setUserGroup(UserGroup.USER);
         this.orders = orders;
-    }
-
-    public UserGroup getUserGroup() {
-        return userGroup;
     }
 
     public List<Order> getOrders() {

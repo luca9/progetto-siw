@@ -18,9 +18,6 @@ import java.util.Date;
 public class UserController {
     private static final long serialVersionUID = 1L;
 
-    @EJB(beanName = "userController")
-    private UserFacade userFacade;
-
     private String firstName;
     private String lastName;
     private String email;
@@ -31,6 +28,9 @@ public class UserController {
     private String username;
     private String password;
 
+    @EJB(beanName = "userController")
+    private UserFacade userFacade;
+
 
     //addresses
     private String street;
@@ -40,20 +40,32 @@ public class UserController {
     private String country;
 
 
+    public void main (String [] args) {
+        System.out.println(userFacade.getUser(Long.parseLong("1")));
+    }
 
-    public String createUser() {
+
+    public String saveUser() {
         Address address = new Address(country, street, city, state, zipCode);
-        this.userFacade.saveUser(username, password, firstName, lastName, email,
+        userFacade.saveUser(username, password, firstName, lastName, email,
                 phoneNumber, dateOfBirth, address);
         return "confirmRegistration";
     }
 
     public String login() {
-         if (userFacade.verifyUser(username,password).getUserGroup().equals(UserGroup.USER))
+         if (userFacade.getUser(username).getUserGroup() == UserGroup.USER)
              return "welcomeUser";
          else return "welcomeAdmin";
     }
 
+
+    public UserFacade getUserFacade() {
+        return userFacade;
+    }
+
+    public void setUserFacade(UserFacade userFacade) {
+        this.userFacade = userFacade;
+    }
 
     public String getFirstName() {return firstName;}
 

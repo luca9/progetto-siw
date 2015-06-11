@@ -9,6 +9,7 @@ import it.uniroma3.model.Address;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
 
 @Stateless(name = "userController")
@@ -23,7 +24,6 @@ public class UserFacade {
     public RegisteredUser saveUser
             (String username, String password, String firstName, String lastName, String email,
              String phoneNumber, Date dateOfBirth, Address address) {
-
         RegisteredUser user = new RegisteredUser(username, password, firstName, lastName, email,
                 phoneNumber, dateOfBirth, address, null);
         em.persist(user);
@@ -36,19 +36,12 @@ public class UserFacade {
     }
 
     public User getUser (Long id) {
-        User user = this.em.find(RegisteredUser.class, id);
-        return user;
+        return em.find(User.class, id);
     }
 
 
-    public RegisteredUser verifyUser (String username, String password) {
-        RegisteredUser user = new RegisteredUser();
-        List<RegisteredUser> users = em.createQuery
-                ("select u from RegisteredUser u where u.username = :username",
-                        RegisteredUser.class).getResultList();
-        for (RegisteredUser u : users)
-            if (u.getPassword().equals(password)) user = u;
-        return user;
+    public User getUser (String username) {
+        return em.find(User.class, username);
     }
 
     public void updateUser (User user) {

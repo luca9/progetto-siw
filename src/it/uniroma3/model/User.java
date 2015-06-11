@@ -1,5 +1,6 @@
 package it.uniroma3.model;
 
+import it.uniroma3.enums.UserGroup;
 import org.apache.openejb.jee.jba.cmp.Strategy;
 
 import javax.persistence.*;
@@ -19,10 +20,13 @@ public abstract class User {
     private Long id;
 
     @Column(nullable = false)
-    String username;
+    private String username;
 
     @Column(nullable = false)
-    String password;
+    private String password;
+
+    @Column(nullable = false)
+    private UserGroup userGroup;
 
     @Column(nullable = false)
     private String firstName;
@@ -88,6 +92,14 @@ public abstract class User {
         this.password = password;
     }
 
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -131,6 +143,7 @@ public abstract class User {
     public Date getRegistrationDate() {
         return registrationDate;
     }
+
     public Address getAddress() {
         return address;
     }
