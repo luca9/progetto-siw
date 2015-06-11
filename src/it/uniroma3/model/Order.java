@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Created by lorenzovalente on 27/03/15.
@@ -37,6 +39,13 @@ public class Order {
 
 	@ManyToOne
 	private RegisteredUser customer;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date opened;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date closed;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date processed;
 
 	@OneToMany
 	@JoinColumn(name = "orders_id")
@@ -104,6 +113,22 @@ public class Order {
 		}
 		a.setQuantity(a.getQuantity() + quantity);
 	}
+	
+	public Date getOpened() {
+		return opened;
+    }
+
+    public void setOpened(Date opened) {
+        this.opened = opened;
+    }
+    
+	public Date getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Date closed) {
+        this.closed = closed;
+    }
 
 	@Override
 	public boolean equals(Object o) {
