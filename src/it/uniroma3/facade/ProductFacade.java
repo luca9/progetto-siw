@@ -16,6 +16,14 @@ public class ProductFacade {
 	public ProductFacade() {
 	}
 
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	public Product createProduct(String name, Float price, String code, String description, int inStock) {
 		Product product = new Product(name, price, description, code, inStock);
 		this.em.persist(product);
