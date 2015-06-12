@@ -66,9 +66,9 @@ public class UserController {
         return "product";
     }
     
-    public String getOrders() {
+    public String listOrders() {
         this.orders = this.userFacade.getAllOrder();
-        return "orders";
+        return "MyOrders";
     }
 
 
