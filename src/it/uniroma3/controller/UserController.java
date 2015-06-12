@@ -1,8 +1,10 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.enums.UserGroup;
+import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.facade.UserFacade;
 import it.uniroma3.model.Address;
+import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -27,9 +29,12 @@ public class UserController {
     private Address address;
     private String username;
     private String password;
+    private Product product;
 
-    @EJB(beanName = "userController")
+    @EJB(beanName = "user")
     private UserFacade userFacade;
+
+    private ProductFacade productFacade;
 
 
     //addresses
@@ -38,11 +43,6 @@ public class UserController {
     private String state;
     private String zipCode;
     private String country;
-
-
-    public void main (String [] args) {
-        System.out.println(userFacade.getUser(Long.parseLong("1")));
-    }
 
 
     public String saveUser() {
@@ -56,6 +56,11 @@ public class UserController {
          if (userFacade.getUser(username).getUserGroup() == UserGroup.USER)
              return "welcomeUser";
          else return "welcomeAdmin";
+    }
+
+    public String getProduct(String code) {
+        this.product = this.productFacade.getProduct(code);
+        return "product";
     }
 
 

@@ -20,9 +20,10 @@ public class Login {
 
     private User user;
 
+
     private String errorMessage;
 
-    private String email;
+    private String username;
     private String password;
 
     public String getErrorMessage() {
@@ -33,12 +34,12 @@ public class Login {
         this.errorMessage = errorMessage;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -53,24 +54,12 @@ public class Login {
         return user;
     }
 
-    private void redirectHome() throws IOException {
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect("/");
-    }
-
-
-    public void checkIsLoggedIn() throws IOException {
-        if (isLoggedIn()) {
-            redirectHome();
-        }
-    }
-
     public boolean isLoggedIn() {
         return user != null;
     }
 
     public String login() {
-        User u = this.userFacade.findUser(email);
+        User u = this.userFacade.findUser(username);
         if (u == null) {
             this.errorMessage = "Invalid email";
             return "pretty:login";

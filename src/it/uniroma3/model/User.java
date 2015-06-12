@@ -12,6 +12,7 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 

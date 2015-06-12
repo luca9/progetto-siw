@@ -14,7 +14,7 @@ import javax.ejb.Stateless;
 import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
 
-@Stateless(name = "userController")
+@Stateless(name = "user")
 public class UserFacade {
 
     @PersistenceContext(unitName = "products-unit")
