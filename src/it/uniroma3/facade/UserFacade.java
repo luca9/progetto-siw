@@ -63,13 +63,13 @@ public class UserFacade {
         if (user!=null) this.em.remove(user);
     }
 
-    public User findUser(String email, UserGroup group) {
+    public User findUser(String username, UserGroup group) {
         String subQuery = (group == null) ? "" : " AND u.group = " + group;
         User u = null;
         try {
             u = (User) this.em.createQuery("SELECT u FROM User u WHERE " +
-                    "u.email = :email" + subQuery)
-                    .setParameter("email", email)
+                    "u.username = :email" + subQuery)
+                    .setParameter("email", username)
                     .getSingleResult();
         } catch (Exception ignored) {
         }

@@ -62,15 +62,15 @@ public class Login {
         User u = this.userFacade.findUser(username);
         if (u == null) {
             this.errorMessage = "Invalid email";
-            return "pretty:login";
+            return "login";
         } else if (!this.password.equals(u.getPassword())) {
             this.errorMessage = "Invalid password";
-            return "pretty:login";
+            return "login";
         }
         this.errorMessage = null;
         this.user = u;
 
-        return "pretty:home";
+        return "/";
     }
 
     public String logout() {

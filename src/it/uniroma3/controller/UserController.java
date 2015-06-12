@@ -53,7 +53,7 @@ public class UserController {
     }
 
     public String login() {
-         if (userFacade.getUser(username).getUserGroup() == UserGroup.USER)
+         if (userFacade.findUser(username).getUserGroup() == UserGroup.USER)
              return "welcomeUser";
          else return "welcomeAdmin";
     }
