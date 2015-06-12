@@ -3,10 +3,7 @@ package it.uniroma3.facade;
 import java.util.Date;
 
 import it.uniroma3.enums.UserGroup;
-import it.uniroma3.model.Administrator;
-import it.uniroma3.model.RegisteredUser;
-import it.uniroma3.model.User;
-import it.uniroma3.model.Address;
+import it.uniroma3.model.*;
 
 import java.util.List;
 
@@ -43,6 +40,10 @@ public class UserFacade {
     public List <RegisteredUser> getAllRegisteredUsers() {
         return em.createQuery("select u from RegisteredUser u",
                 RegisteredUser.class).getResultList();
+    }
+
+    public List <Order> getAllOrder() {
+        return em.createQuery("select o from Order o", Order.class).getResultList();
     }
 
     public User getUser (Long id) {
