@@ -4,6 +4,7 @@ import it.uniroma3.enums.UserGroup;
 import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.facade.UserFacade;
 import it.uniroma3.model.Address;
+import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
 import it.uniroma3.model.User;
 
@@ -11,6 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lorenzovalente on 24/05/15.
@@ -44,6 +46,7 @@ public class UserController {
     private String state;
     private String zipCode;
     private String country;
+    private List<Order> orders;
 
 
     public String saveUser() {
@@ -64,6 +67,11 @@ public class UserController {
     public String getProduct(String code) {
         this.product = this.productFacade.getProduct(code);
         return "product";
+    }
+    
+    public String listOrders() {
+        this.orders = this.userFacade.getAllOrder();
+        return "MyOrders";
     }
 
 
