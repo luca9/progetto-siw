@@ -12,8 +12,8 @@ import java.util.*;
 
 
 @Entity
-@Table(name = "users")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "userGroup")
 public abstract class User {
 
     @Id
@@ -26,7 +26,9 @@ public abstract class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Basic(fetch = FetchType.EAGER)
+    @Column(nullable = false, name = "userGroup")
+    @Enumerated(value = EnumType.STRING)
     private UserGroup userGroup;
 
     @Column(nullable = false)

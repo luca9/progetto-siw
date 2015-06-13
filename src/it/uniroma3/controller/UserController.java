@@ -5,6 +5,7 @@ import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.facade.UserFacade;
 import it.uniroma3.model.Address;
 import it.uniroma3.model.Product;
+import it.uniroma3.model.User;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -53,7 +54,9 @@ public class UserController {
     }
 
     public String login() {
-         if (userFacade.findUser(username).getUserGroup() == UserGroup.USER)
+        User u = userFacade.getUser(username);
+        if (u == null || !u.getPassword().equals(password)) return "login";
+        else if (u.getUserGroup() == UserGroup.USER)
              return "welcomeUser";
          else return "welcomeAdmin";
     }

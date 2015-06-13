@@ -58,20 +58,20 @@ public class Login {
         return user != null;
     }
 
-    public String login() {
-        User u = this.userFacade.findUser(username);
-        if (u == null) {
-            this.errorMessage = "Invalid email";
-            return "login";
-        } else if (!this.password.equals(u.getPassword())) {
-            this.errorMessage = "Invalid password";
-            return "login";
-        }
-        this.errorMessage = null;
-        this.user = u;
-
-        return "/";
-    }
+//    public String login() {
+//        User u = this.userFacade.getUser(username);
+//        if (u == null) {
+//            this.errorMessage = "Invalid email";
+//            return "login";
+//        } else if (!this.password.equals(u.getPassword())) {
+//            this.errorMessage = "Invalid password";
+//            return "login";
+//        }
+//        this.errorMessage = null;
+//        this.user = u;
+//
+//        return "/";
+//    }
 
     public String logout() {
         user = null;

@@ -49,11 +49,20 @@ public class UserFacade {
         return em.find(User.class, id);
     }
 
-
-    public User getUser (String username) {
-        return em.find(User.class, username);
+    public User getUser(String username) {
+        User user = null;
+        try {
+            user = (User) this.em.createQuery("SELECT u FROM User u" +
+                    " WHERE  u.email = :username" +
+                    " OR u.username = :username", User.class)
+                    .setParameter("username", username).getSingleResult();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
-    
+
      public void updateUser (User user) {
         this.em.merge(user);
     }
@@ -63,30 +72,15 @@ public class UserFacade {
         if (user!=null) this.em.remove(user);
     }
 
-    public User findUser(String username, UserGroup group) {
-        String subQuery = (group == null) ? "" : " AND u.group = " + group;
-        User u = null;
-        try {
-            u = (User) this.em.createQuery("SELECT u FROM User u WHERE " +
-                    "u.username = :email" + subQuery)
-                    .setParameter("email", username)
-                    .getSingleResult();
-        } catch (Exception ignored) {
-        }
-        return u;
-    }
 
-    public User findUser(String email) {
-        return findUser(email, null);
-    }
-
-    public RegisteredUser findCustomer(String email) {
-        return (RegisteredUser) findUser(email, UserGroup.USER);
-    }
-
-    public Administrator findAdmin(String email) {
-        return (Administrator) findUser(email, UserGroup.ADMINISTRATOR);
-    }
+//
+//    public RegisteredUser findCustomer(String email) {
+//        return (RegisteredUser) getUser(email, UserGroup.USER);
+//    }
+//
+//    public Administrator findAdmin(String email) {
+//        return (Administrator) getUser(email, UserGroup.ADMINISTRATOR);
+//    }
 
 }
 
