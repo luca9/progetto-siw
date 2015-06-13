@@ -2,11 +2,7 @@ package it.uniroma3.model;
 
 import it.uniroma3.enums.OrderState;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +21,7 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-@Table(name = "CustomerOrder")
+@Table(name = "ordine")
 public class Order {
 
 	@Id
@@ -117,11 +113,24 @@ public class Order {
 		a.setQuantity(a.getQuantity() + quantity);
 	}
 
+	public float getTotal() {
+		float total = 0;
+		for(OrderLine orderLine: this.orderLines.values())
+			total += orderLine.getSubTotal();
+		return total;
+
+	}
+
 	public void close(){
 		this.closed = new Date();
 		this.state = OrderState.CLOSED;
 	}
-	
+
+	public List<OrderLine> getItems(){
+		return new ArrayList<>(orderLines.values());
+	}
+
+
 	public Date getOpened() {
 		return opened;
     }

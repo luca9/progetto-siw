@@ -50,6 +50,10 @@ public class OrderLine {
 		this.unitPrice = unitPrice;
 	}
 
+	public float getSubTotal () {
+		return this.quantity * this.unitPrice;
+	}
+
 	public Integer getQuantity() { return this.quantity;}
 
 	public void setQuantity(Integer quantity) {
