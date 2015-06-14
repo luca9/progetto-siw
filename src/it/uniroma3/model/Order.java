@@ -4,24 +4,14 @@ import it.uniroma3.enums.OrderState;
 
 import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  * Created by lorenzovalente on 27/03/15.
  */
 
 @Entity
-@Table(name = "ordine")
+@Table(name = "CustomerOrder")
 public class Order {
 
 	@Id
@@ -29,26 +19,22 @@ public class Order {
 	private Long id;
 
 	@Column(nullable = false)
-	public OrderState state;
-
-	@Column(nullable = false)
 	private Date creationTime;
 
+	@Column(nullable = false)
 	private OrderState orderState;
 
 	@ManyToOne
 	private RegisteredUser customer;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-    private Date opened;
+    private Date placed;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date closed;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date processed;
+    private Date dispatched;
 
-	@OneToMany
-	@JoinColumn(name = "orders_id")
-	private Map<Long, OrderLine> orderLines;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "OrderLines")
+	private Map <Long, OrderLine> orderLines;
 
 
 	public Order() {
@@ -93,10 +79,6 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public void setUser(User user) {
-		this.customer = customer;
-	}
-
 	public Map<Long, OrderLine> getOrderLines() {
 		return orderLines;
 	}
@@ -121,9 +103,9 @@ public class Order {
 
 	}
 
-	public void close(){
-		this.closed = new Date();
-		this.state = OrderState.CLOSED;
+	public void dispatch(){
+		this.dispatched = Calendar.getInstance().getTime();
+		this.orderState = OrderState.PLACED;
 	}
 
 	public List<OrderLine> getItems(){
@@ -131,20 +113,20 @@ public class Order {
 	}
 
 
-	public Date getOpened() {
-		return opened;
+	public Date getPlaced() {
+		return placed;
     }
 
-    public void setOpened(Date opened) {
-        this.opened = opened;
+    public void setPlaced(Date placed) {
+        this.placed = placed;
     }
     
-	public Date getClosed() {
-        return closed;
+	public Date getDispatched() {
+        return dispatched;
     }
 
-    public void setClosed(Date closed) {
-        this.closed = closed;
+    public void setDispatched(Date dispatched) {
+        this.dispatched = dispatched;
     }
 
 	public int getSize() {

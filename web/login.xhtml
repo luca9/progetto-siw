@@ -1,9 +1,6 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+   >
 <h:head>
     <title>Insert your username and password</title>
     <!-- Latest compiled and minified CSS -->
@@ -18,7 +15,7 @@
     <h2>Login</h2>
 
     <label>Username:
-        <h:inputText value="#{userController.username}"
+        <h:inputText value="#{login.username}"
                      required="true"
                      requiredMessage="User name is mandatory" id="username"/>
     </label><h:message for="username"/>
@@ -26,14 +23,14 @@
     <br/><br/>
 
     <label>Password:
-        <h:inputSecret value="#{userController.password}"
+        <h:inputSecret value="#{login.password}"
                        required="true"
                        requiredMessage="Password is mandatory"
                        id="password"/>
     </label><h:message for="password"/>
 
     <br/><br/>
-        <h:commandLink action="#{userController.login}" value ="Login"/>
+        <h:commandLink action="#{login.login}" value ="Login"/>
 
     </h:form>
 </f:view>

@@ -6,7 +6,8 @@ import javax.persistence.*;
 /**
  * Created by lorenzovalente on 27/03/15.
  */
-@Entity
+
+@Embeddable
 public class OrderLine {
 
 	@Id
@@ -29,7 +30,7 @@ public class OrderLine {
 
 	public OrderLine (Float unitPrice, int quantity, Product product) throws Exception {
 		if (quantity <=0)
-			throw new Exception("Invalid quantity");
+			throw new Exception("Invalid input");
 		else if (quantity > product.getInStock())
 			throw new Exception("Not enough " + product.getName()+" in stock");
 		this.unitPrice = unitPrice;

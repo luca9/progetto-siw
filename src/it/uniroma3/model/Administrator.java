@@ -2,6 +2,7 @@ package it.uniroma3.model;
 
 import it.uniroma3.enums.UserGroup;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import java.util.Date;
  */
 
 @Entity
+@DiscriminatorValue("ADMINISTRATOR")
 public class Administrator extends User {
 
 	public Administrator() {}

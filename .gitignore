@@ -4,3 +4,4 @@
 siw2015.iml
 src/META-INF/persistence.xml
 out
+web/myOrders.xhtml

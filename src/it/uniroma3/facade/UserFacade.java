@@ -53,10 +53,11 @@ public class UserFacade {
     public User getUser(String username) {
         User user = null;
         try {
-            user = (User) this.em.createQuery("SELECT u FROM User u" +
-                    " WHERE  u.email = :username" +
-                    " OR u.username = :username", User.class)
-                    .setParameter("username", username).getSingleResult();
+                Query query = this.em.createQuery("SELECT u FROM User u" +
+                        " WHERE  u.email = :username" +
+                        " OR u.username = :username", User.class)
+                    .setParameter("username", username);
+            user = (User) query.getSingleResult();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -75,12 +76,12 @@ public class UserFacade {
 
 
 //
-//    public RegisteredUser findCustomer(String email) {
-//        return (RegisteredUser) getUser(email, UserGroup.USER);
+//    public REGISTEREDUSER findCustomer(String email) {
+//        return (REGISTEREDUSER) getUser(email, UserGroup.REGISTEREDUSER);
 //    }
 //
-//    public Administrator findAdmin(String email) {
-//        return (Administrator) getUser(email, UserGroup.ADMINISTRATOR);
+//    public ADMINISTRATOR findAdmin(String email) {
+//        return (ADMINISTRATOR) getUser(email, UserGroup.ADMINISTRATOR);
 //    }
 
 }

@@ -2,9 +2,8 @@ package it.uniroma3.model;
 
 import it.uniroma3.enums.UserGroup;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.List;
  */
 
 @Entity
+@DiscriminatorValue("REGISTEREDUSER")
 public class RegisteredUser extends User {
 
 
@@ -28,7 +28,7 @@ public class RegisteredUser extends User {
              List<Order> orders) {
 
         super(username, password, firstName, lastName, email, phoneNumber, dateOfBirth, address);
-        setUserGroup(UserGroup.USER);
+        setUserGroup(UserGroup.REGISTEREDUSER);
         this.orders = orders;
     }
 
@@ -43,5 +43,5 @@ public class RegisteredUser extends User {
     public void addOrder(Order o) {
         this.orders.add(o);
     }
-    
+
 }

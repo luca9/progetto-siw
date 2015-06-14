@@ -20,11 +20,19 @@ public class Login {
 
     private User user;
 
-
     private String errorMessage;
 
     private String username;
     private String password;
+
+
+    public UserFacade getUserFacade() {
+        return userFacade;
+    }
+
+    public void setUserFacade(UserFacade userFacade) {
+        this.userFacade = userFacade;
+    }
 
     public String getErrorMessage() {
         return errorMessage;
@@ -36,6 +44,10 @@ public class Login {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setEmail(String username) {
@@ -54,24 +66,28 @@ public class Login {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public boolean isLoggedIn() {
         return user != null;
     }
 
-//    public String login() {
-//        User u = this.userFacade.getUser(username);
-//        if (u == null) {
-//            this.errorMessage = "Invalid email";
-//            return "login";
-//        } else if (!this.password.equals(u.getPassword())) {
-//            this.errorMessage = "Invalid password";
-//            return "login";
-//        }
-//        this.errorMessage = null;
-//        this.user = u;
-//
-//        return "/";
-//    }
+    public String login() {
+        User u = this.userFacade.getUser(username);
+        if (u == null) {
+            this.errorMessage = "Invalid email";
+            return "login";
+        } else if (!this.password.equals(u.getPassword())) {
+            this.errorMessage = "Invalid password";
+            return "login";
+        }
+        this.errorMessage = null;
+        this.user = u;
+
+        return "welcomeUser";
+    }
 
     public String logout() {
         user = null;

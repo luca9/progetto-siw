@@ -14,7 +14,7 @@ import java.util.List;
 
 @ManagedBean
 @SessionScoped
-public class AdminHandler {
+public class AdminController {
 
     private Order order;
     private List orders;
@@ -55,7 +55,7 @@ public class AdminHandler {
 
 
     public String getClosedOrders() {
-        this.orders = this.of.getClosedOrders();
+        this.orders = this.of.getDispatchedOrders();
         return "openOrders";
     }
 
@@ -83,14 +83,14 @@ public class AdminHandler {
         return "success";
     }*/
 
-    //TODO: da sistemare
-    public String processOrder(Long orderID) {
-        Order o = this.of.processOrder(orderID);
-        if (o != null)
-            return "success";
-        else {
-            return "orderDetails";
-        }
+//
+//    public String processOrder(Long orderID) {
+//        Order o = this.of.processOrder(orderID);
+//        if (o != null)
+//            return "success";
+//        else {
+//            return "orderDetails";
+//        }
 
     }
 
@@ -98,5 +98,3 @@ public class AdminHandler {
 //    	Product p = //trovo il prodotto usando la ProfuctFacade, nella producti facade cerco il prodotto
 //
 
-
-}

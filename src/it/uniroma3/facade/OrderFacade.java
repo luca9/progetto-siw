@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-@Stateless(name = "userController")
+@Stateless(name = "order")
 public class OrderFacade {
 
     @PersistenceContext(unitName = "products-unit")
@@ -46,7 +46,7 @@ public class OrderFacade {
     	em.merge(o);
     }
 
-    public Order processOrder(Long orderID) {
+    public Order placeOrder(Long orderID) {
         Order o = this.getOrder(orderID);
         for (OrderLine ol : o.getOrderLines().values()) {
             Product p = ol.getProduct();
@@ -56,14 +56,14 @@ public class OrderFacade {
             }
             p.setInStock(p.getInStock() - ol.getQuantity());
         }
-        o.setOrderState(OrderState.PROCESSED);
-        o.setClosed(new Date());
+        o.setOrderState(OrderState.PLACED);
+        o.setDispatched(new Date());
         em.merge(o);
         return o;
     }
 
-    public List getClosedOrders() {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.orderState = " + OrderState.CLOSED);
+    public List getDispatchedOrders() {
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.orderState = " + OrderState.DISPATCHED);
         return q.getResultList();
     }
 

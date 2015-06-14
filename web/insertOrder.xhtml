@@ -11,7 +11,7 @@
 
   <body>
         <h1>New Order</h1>
-        Opened: #{registeredUserHandler.currentOrder.opened}
+        Opened: #{registeredUserController.currentOrder.placed}
         <f:view>
             <h:form>
                 <table>
@@ -21,7 +21,7 @@
                         <th>Quantity</th>-->
                         <th>Sub Total</th>
                     </tr>
-                    <ui:repeat var="ol" value="#{registeredUserHandler.currentOrder.items}">
+                    <ui:repeat var="ol" value="#{registeredUserController.currentOrder.items}">
                         <tr>
                             <td>#{ol.product.name}</td>
                             <td>#{ol.unitPrice}</td>
@@ -32,24 +32,24 @@
                 </table>
                 <br/>
 
-                <h1>Total: </h1> #{registeredUserHandler.currentOrder.getTotal}
+                <h1>Total: </h1> #{registeredUserController.currentOrder.getTotal}
 
                 <br/>
                 Add another item:
 
                 <label>Product Code:-->
-                    <h:inputText value="#{registeredUserHandler.productCode}"
+                    <h:inputText value="#{registeredUserController.productCode}"
                                  required="true"
                                  requiredMessage="Code is mandatory"
                             /></label>
                 <label>Quantity:
-                    <h:inputText value="#{registeredUserHandler.quantity}"/>
+                    <h:inputText value="#{registeredUserController.quantity}"/>
                 </label>
-                <h:commandButton value="Add" action="#{registeredUserHandler.addToOrder}" class="btn btn-default"/>
+                <h:commandButton value="Add" action="#{registeredUserController.addToOrder}" class="btn btn-default"/>
 
                 <br/>
                 <br/>
-                <h:commandButton value="Close Order" action="#{registeredUserHandler.closeOrder}" class="btn btn-default"/>
+                <h:commandButton value="Close Order" action="#{registeredUserController.dispatchOrder}" class="btn btn-default"/>
             </h:form>
         </f:view>
   </body>

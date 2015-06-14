@@ -14,7 +14,7 @@
 </h:head>
 <body>
 <f:view>
-    Welcome back, ${userController.username}!
+    Welcome back, ${login.username}!
     <br/>
     Select an action:
     <br/>
@@ -23,7 +23,7 @@
         <br/>
         <h:commandLink action="#{userController.listOrders}" value="My orders"/>
         <br/>
-        <h:commandLink action="#{registeredUserHandler.createOrder}" value="New order"/>
+        <h:commandLink action="#{registeredUserController.createOrder}" value="New order"/>
     </h:form>
     <br/><br/>
 </f:view>

@@ -3,10 +3,7 @@ package it.uniroma3.controller;
 import it.uniroma3.enums.UserGroup;
 import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.facade.UserFacade;
-import it.uniroma3.model.Address;
-import it.uniroma3.model.Order;
-import it.uniroma3.model.Product;
-import it.uniroma3.model.User;
+import it.uniroma3.model.*;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -23,6 +20,7 @@ import java.util.List;
 public class UserController {
     private static final long serialVersionUID = 1L;
 
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -33,14 +31,12 @@ public class UserController {
     private String username;
     private String password;
     private Product product;
+    private Login login;
 
     @EJB(beanName = "user")
     private UserFacade userFacade;
 
-    private ProductFacade productFacade;
 
-
-    //addresses
     private String street;
     private String city;
     private String state;
@@ -56,19 +52,6 @@ public class UserController {
         return "confirmRegistration";
     }
 
-    public String login() {
-        User u = userFacade.getUser(username);
-        if (u == null || !u.getPassword().equals(password)) return "login";
-        else if (u.getUserGroup() == UserGroup.USER)
-             return "welcomeUser";
-         else return "welcomeAdmin";
-    }
-
-    public String getProduct(String code) {
-        this.product = this.productFacade.getProduct(code);
-        return "product";
-    }
-    
     public String listOrders() {
         this.orders = this.userFacade.getAllOrder();
         return "MyOrders";
@@ -81,6 +64,14 @@ public class UserController {
 
     public void setUserFacade(UserFacade userFacade) {
         this.userFacade = userFacade;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {return firstName;}

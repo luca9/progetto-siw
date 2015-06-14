@@ -6,8 +6,5 @@ package it.uniroma3.enums;
 public enum OrderState {
     PLACED,
     DISPATCHED,
-    PROCESSED,
-    CLOSED
-
 }
 

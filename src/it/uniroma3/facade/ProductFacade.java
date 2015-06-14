@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Stateless(name = "productController")
+@Stateless(name = "product")
 public class ProductFacade {
 
 	@PersistenceContext(unitName = "products-unit")

@@ -17,19 +17,21 @@ import java.util.List;
 
 @ManagedBean
 @SessionScoped
-public class RegisteredUserHandler {
+public class RegisteredUserController {
     @ManagedProperty(value = "#{login.user}")
     private RegisteredUser currentCustomer;
     private List<Order> orders;
     private Order order;
     private Cart cart;
     private Order currentOrder;
+
     @EJB(name = "order")
     private OrderFacade orderFacade;
     @EJB(name = "product")
     private ProductFacade productFacade;
     @EJB(name = "user")
     private UserFacade userFacade;
+
     private String productCode;
     private int quantity;
     @ManagedProperty(value = "#{login}")
@@ -96,8 +98,8 @@ public class RegisteredUserHandler {
         this.orderFacade = orderFacade;
     }
 
-    public String closeOrder() {
-        this.currentOrder.close();
+    public String dispatchOrder() {
+        this.currentOrder.dispatch();
         this.currentCustomer.addOrder(this.currentOrder);
         this.userFacade.updateUser(this.currentCustomer);
         return "confirmation";
@@ -130,7 +132,7 @@ public class RegisteredUserHandler {
 
     public String findOrder(Long orderID) {
         this.order = this.orderFacade.getOrder(orderID);
-        return "orderDetail";
+        return "order";
     }
 
     public String createOrder() {
@@ -158,7 +160,7 @@ public class RegisteredUserHandler {
 
     public void closeCart() {
         this.currentOrder = cart;
-        closeOrder();
+        dispatchOrder();
     }
 
     public String addToOrder() throws Exception {
