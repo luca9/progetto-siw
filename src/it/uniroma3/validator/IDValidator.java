@@ -21,7 +21,7 @@ public class IDValidator implements Validator {
     @Override
     public void validate (FacesContext context, UIComponent component, Object value)
     throws ValidatorException {
-        Long l = (Long)value;
+        String l = (String)value;
         if (productFacade.getProduct(l) == null) {
             FacesMessage msg = new FacesMessage("ID not found");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);

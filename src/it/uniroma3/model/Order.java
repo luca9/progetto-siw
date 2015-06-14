@@ -34,7 +34,7 @@ public class Order {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "OrderLines")
-	private Map <Long, OrderLine> orderLines;
+	private Map <String, OrderLine> orderLines;
 
 
 	public Order() {
@@ -44,7 +44,7 @@ public class Order {
 	public Order (RegisteredUser customer) {
 		this.creationTime = Calendar.getInstance().getTime();
 		this.customer = customer;
-		this.orderLines = new HashMap<Long,OrderLine>();
+		this.orderLines = new HashMap <>();
 	}
 
 	public Long getId () {
@@ -79,18 +79,18 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public Map<Long, OrderLine> getOrderLines() {
+	public Map<String, OrderLine> getOrderLines() {
 		return orderLines;
 	}
 
-	public void setOrderLines(Map<Long, OrderLine> orderLines) {
+	public void setOrderLines(Map<String, OrderLine> orderLines) {
 		this.orderLines = orderLines;
 	}
 	
 	public void addProductToOrder(int quantity, Product product) throws Exception {
-		OrderLine a = this.orderLines.get(product.getId());
+		OrderLine a = this.orderLines.get(product.getCode());
 		if (a==null) {
-			a = orderLines.put(product.getId(),new OrderLine(product.getPrice(),0,product));
+			a = orderLines.put(product.getCode(),new OrderLine(product.getPrice(),0,product));
 		}
 		a.setQuantity(a.getQuantity() + quantity);
 	}
@@ -135,10 +135,32 @@ public class Order {
 
 	@Override
 	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Order)) return false;
+
 		Order order = (Order) o;
-		return this.getId() == order.getId();
+
+		if (id != null ? !id.equals(order.id) : order.id != null) return false;
+		if (creationTime != null ? !creationTime.equals(order.creationTime) : order.creationTime != null) return false;
+		if (orderState != order.orderState) return false;
+		if (customer != null ? !customer.equals(order.customer) : order.customer != null) return false;
+		if (placed != null ? !placed.equals(order.placed) : order.placed != null) return false;
+		if (dispatched != null ? !dispatched.equals(order.dispatched) : order.dispatched != null) return false;
+		return !(orderLines != null ? !orderLines.equals(order.orderLines) : order.orderLines != null);
+
 	}
 
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
+		result = 31 * result + (orderState != null ? orderState.hashCode() : 0);
+		result = 31 * result + (customer != null ? customer.hashCode() : 0);
+		result = 31 * result + (placed != null ? placed.hashCode() : 0);
+		result = 31 * result + (dispatched != null ? dispatched.hashCode() : 0);
+		result = 31 * result + (orderLines != null ? orderLines.hashCode() : 0);
+		return result;
+	}
 
 	@Override
 	public String toString() {

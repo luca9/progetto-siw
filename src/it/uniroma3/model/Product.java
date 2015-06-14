@@ -6,8 +6,9 @@ import javax.persistence.*;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@Column(nullable = false)
+	private String code;
+
 
 	@Column(nullable = false)
 	private String name;
@@ -18,8 +19,6 @@ public class Product {
 	@Column(nullable = false)
 	private String description;
 
-	@Column(nullable = false)
-	private String code;
 
 	@Column(nullable = false)
 	private int inStock;
@@ -33,16 +32,6 @@ public class Product {
 		this.description = description;
 		this.code = code;
 		this.inStock = inStock;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	//          Getters & Setters        
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -81,25 +70,33 @@ public class Product {
 
 	public void setInStock(int inStock) { this.inStock = inStock; }
 
-	public boolean equals(Object obj) {
-		Product product = (Product) obj;
-		return this.getCode().equals(product.getCode());
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Product)) return false;
+
+		Product product = (Product) o;
+
+		if (inStock != product.inStock) return false;
+		if (code != null ? !code.equals(product.code) : product.code != null) return false;
+		if (name != null ? !name.equals(product.name) : product.name != null) return false;
+		if (price != null ? !price.equals(product.price) : product.price != null) return false;
+		return !(description != null ? !description.equals(product.description) : product.description != null);
+
 	}
 
 	public int hashCode() {
 		return this.code.hashCode();
 	}
 
+	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append("it.uniroma3.model.Product");
-		sb.append("{id=").append(id);
-		sb.append(", name='").append(name);
-		sb.append("', price=").append(price);
-		sb.append(", description='").append(description);
-		sb.append("', code='").append(code);
-		sb.append("'}\n");
-		return sb.toString();
+		return "Product{" +
+				"code='" + code + '\'' +
+				", name='" + name + '\'' +
+				", price=" + price +
+				", description='" + description + '\'' +
+				", inStock=" + inStock +
+				'}';
 	}
-
 }

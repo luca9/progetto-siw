@@ -30,11 +30,7 @@ public class ProductFacade {
 		return product;
 	}
 
-	public Product getProduct(Long id) {
-		return this.em.find(Product.class, id);
-	}
-
-	public Product getProduct(String code ) {
+	public Product getProduct(String code) {
 		return this.em.find(Product.class, code );
 	}
 
@@ -63,8 +59,8 @@ public class ProductFacade {
 		this.em.merge(product);
 	}
 
-	public void deleteProduct(Long id) {
-		Product product = getProduct(id);
+	public void deleteProduct(String code) {
+		Product product = getProduct(code);
 		if (product != null) {
 			this.em.remove(product);
 		}

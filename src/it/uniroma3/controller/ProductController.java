@@ -16,12 +16,10 @@ public class ProductController {
 
 	public ProductController(){
 	}
-
-	private Long id;
+	private String code;
 	private String name;
 	private Float price;
 	private String description;
-	private String code;
 	private String searchTerm;
 	private Product product;
 	private int inStock;
@@ -44,12 +42,12 @@ public class ProductController {
 	}
 
 	public String findProduct() {
-		this.product = this.productFacade.getProduct(id);
+		this.product = this.productFacade.getProduct(code);
 		return "product";
 	}
 
-	public String findProduct(Long id) {
-		this.product = this.productFacade.getProduct(id);
+	public String findProduct(String code) {
+		this.product = this.productFacade.getProduct(code);
 		return "product";
 	}
 
@@ -64,15 +62,15 @@ public class ProductController {
 	}
 
 	public String increaseProductStock () {
-		Product product = productFacade.getProduct(id);
+		Product product = productFacade.getProduct(code);
 		product.setInStock(product.getInStock()+quantity);
 		productFacade.updateProduct(product);
 		this.product = product;
 		return "confirmAdd";
 	}
 
-	public String decreaseProductStock (Long id, int quantity) {
-		Product product = productFacade.getProduct(id);
+	public String decreaseProductStock (String code, int quantity) {
+		Product product = productFacade.getProduct(code);
 		if (quantity>=product.getInStock()) product.setInStock(0);
 		else product.setInStock(product.getInStock()-quantity);
 		productFacade.updateProduct(product);
@@ -81,18 +79,17 @@ public class ProductController {
 	}
 
 	public String removeProduct () {
-		product = productFacade.getProduct(id);
-		productFacade.deleteProduct(id);
+		product = productFacade.getProduct(code);
+		productFacade.deleteProduct(code);
 		return "confirmDeletion";
 	}
 
-
-	public Long getId() {
-		return id;
+	public String getCode() {
+		return code;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getName() {
@@ -125,14 +122,6 @@ public class ProductController {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public String getSearchTerm() { return searchTerm; }
