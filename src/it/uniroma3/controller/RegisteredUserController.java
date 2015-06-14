@@ -150,12 +150,12 @@ public class RegisteredUserController {
 
     public String addToCart(String productCode) throws Exception {
         if (!login.isLoggedIn())
-            return "pretty:login";
+            return "login";
         if (cart == null)
             this.cart = new Cart(currentCustomer);
         Product p = this.productFacade.getProduct(productCode);
-        this.cart.addProductToOrder(quantity, p);
-        return "pretty:";
+        this.cart.addProduct(quantity, p);
+        return "welcomeUser";
     }
 
     public void closeCart() {
@@ -166,7 +166,7 @@ public class RegisteredUserController {
     public String addToOrder() throws Exception {
         Product p = this.productFacade.getProduct(productCode);
         if (p != null)
-            this.currentOrder.addProductToOrder(quantity, p);
+            this.currentOrder.addProduct(quantity, p);
         return "insertOrder";
     }
 }

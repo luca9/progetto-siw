@@ -86,13 +86,13 @@ public class Order {
 	public void setOrderLines(Map<String, OrderLine> orderLines) {
 		this.orderLines = orderLines;
 	}
-	
-	public void addProductToOrder(int quantity, Product product) throws Exception {
+
+	public void addProduct(int quantity, Product product) throws Exception {
 		OrderLine a = this.orderLines.get(product.getCode());
-		if (a==null) {
-			a = orderLines.put(product.getCode(),new OrderLine(product.getPrice(),0,product));
-		}
+		if (a==null)
+			a = orderLines.put(product.getCode(), new OrderLine(product.getPrice(), 0, product));
 		a.setQuantity(a.getQuantity() + quantity);
+        this.orderLines.put(product.getCode(), a);
 	}
 
 	public float getTotal() {
