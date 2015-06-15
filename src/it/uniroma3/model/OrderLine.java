@@ -29,7 +29,7 @@ public class OrderLine {
 	public OrderLine() {}
 
 	public OrderLine (Float unitPrice, int quantity, Product product) throws Exception {
-		if (quantity <=0)
+		if (quantity <0)
 			throw new Exception("Invalid input");
 		else if (quantity > product.getInStock())
 			throw new Exception("Not enough " + product.getName()+" in stock");

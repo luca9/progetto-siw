@@ -165,8 +165,9 @@ public class RegisteredUserController {
 
     public String addToOrder() throws Exception {
         Product p = this.productFacade.getProduct(productCode);
-        if (p != null)
+        if (p != null){
             this.currentOrder.addProduct(quantity, p);
-        return "insertOrder";
+        }
+            return "insertOrder";
     }
 }

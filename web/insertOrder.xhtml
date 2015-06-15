@@ -21,7 +21,7 @@
                         <th>Quantity</th>-->
                         <th>Sub Total</th>
                     </tr>
-                    <ui:repeat var="ol" value="#{registeredUserController.currentOrder.orderLines.values}">
+                    <ui:repeat var="ol" value="#{registeredUserController.currentOrder.items}">
                         <tr>
                             <td>#{ol.product.name}</td>
                             <td>#{ol.unitPrice}</td>
@@ -32,7 +32,7 @@
                 </table>
                 <br/>
 
-                <h1>Total: </h1> #{registeredUserController.currentOrder.getTotal}
+                <h1>Total: </h1> #{registeredUserController.currentOrder.total}
                 <br/>
                 Add another item:
 

@@ -6,12 +6,9 @@ import org.apache.openejb.jee.jba.cmp.Strategy;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * Created by lorenzovalente on 27/03/15.
- */
-
 
 @Entity
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "userGroup")
 public abstract class User {

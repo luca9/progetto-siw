@@ -1,6 +1,5 @@
 /bin/
 
-src/META-INF/persistence.xml
 out
 web/myOrders.xhtml
 .idea

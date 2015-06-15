@@ -26,28 +26,28 @@ public class Order {
 
 	@ManyToOne
 	private RegisteredUser customer;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-    private Date placed;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dispatched;
+	private Date placed;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dispatched;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "OrderLines")
-	private Map <String, OrderLine> orderLines;
+	private Map<String, OrderLine> orderLines;
 
 
 	public Order() {
 		this.creationTime = Calendar.getInstance().getTime();
 	}
 
-	public Order (RegisteredUser customer) {
+	public Order(RegisteredUser customer) {
 		this.creationTime = Calendar.getInstance().getTime();
 		this.customer = customer;
-		this.orderLines = new HashMap <>();
+		this.orderLines = new HashMap<>();
 	}
 
-	public Long getId () {
+	public Long getId() {
 		return id;
 	}
 
@@ -63,11 +63,11 @@ public class Order {
 		this.orderState = orderState;
 	}
 
-	public void placeOrder () {
+	public void placeOrder() {
 		this.setOrderState(OrderState.PLACED);
 	}
 
-	public void dispatchOrder () {
+	public void dispatchOrder() {
 		this.setOrderState(OrderState.DISPATCHED);
 	}
 
@@ -88,11 +88,12 @@ public class Order {
 	}
 
 	public void addProduct(int quantity, Product product) throws Exception {
-		OrderLine a = this.orderLines.get(product.getCode());
-		if (a==null)
-			a = orderLines.put(product.getCode(), new OrderLine(product.getPrice(), 0, product));
-		a.setQuantity(a.getQuantity() + quantity);
-        this.orderLines.put(product.getCode(), a);
+		OrderLine a = orderLines.get(product.getCode());
+		if (a == null)
+			a = new OrderLine(product.getPrice(), quantity, product);
+		int s = a.getQuantity();
+		a.setQuantity(s + quantity);
+		orderLines.put(product.getCode(), a);
 	}
 
 	public float getTotal() {

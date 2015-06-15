@@ -1,14 +1,12 @@
 package it.uniroma3.controller;
 
+import it.uniroma3.enums.UserGroup;
 import it.uniroma3.facade.UserFacade;
 import it.uniroma3.model.User;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import java.io.IOException;
 
 
 @ManagedBean(name = "login")
@@ -85,7 +83,8 @@ public class Login {
         }
         this.errorMessage = null;
         this.user = u;
-
+        if (u.getUserGroup() == UserGroup.ADMINISTRATOR)
+            return "welcomeAdmin";
         return "welcomeUser";
     }
 
