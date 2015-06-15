@@ -2,9 +2,7 @@ package it.uniroma3.model;
 
 import it.uniroma3.enums.UserGroup;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +15,7 @@ import java.util.List;
 public class RegisteredUser extends User {
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER, cascade= CascadeType.ALL)
     private List<Order> orders;
 
     public RegisteredUser() {}

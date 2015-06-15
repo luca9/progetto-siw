@@ -10,7 +10,7 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "userGroup")
+@DiscriminatorColumn(name = "usergroup")
 public abstract class User {
 
     @Id
@@ -70,7 +70,9 @@ public abstract class User {
     }
 
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;

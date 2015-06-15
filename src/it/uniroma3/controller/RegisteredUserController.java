@@ -9,6 +9,7 @@ import it.uniroma3.model.RegisteredUser;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -156,6 +157,11 @@ public class RegisteredUserController {
         Product p = this.productFacade.getProduct(productCode);
         this.cart.addProduct(quantity, p);
         return "welcomeUser";
+    }
+
+    @PostConstruct
+    private void forceGetC(){
+        this.currentCustomer = login.getCustomer();
     }
 
     public void closeCart() {

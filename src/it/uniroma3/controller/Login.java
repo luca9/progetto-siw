@@ -2,6 +2,7 @@ package it.uniroma3.controller;
 
 import it.uniroma3.enums.UserGroup;
 import it.uniroma3.facade.UserFacade;
+import it.uniroma3.model.RegisteredUser;
 import it.uniroma3.model.User;
 
 import javax.ejb.EJB;
@@ -93,7 +94,7 @@ public class Login {
         return "pretty:home";
     }
 
-    public User getCustomer() {
-        return null;
+    public RegisteredUser getCustomer() {
+        return (RegisteredUser) user;
     }
 }
