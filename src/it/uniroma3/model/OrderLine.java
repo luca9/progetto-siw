@@ -10,10 +10,6 @@ import javax.persistence.*;
 @Embeddable
 public class OrderLine {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
 	@Column(nullable = false)
 	private Float unitPrice;
 
@@ -35,9 +31,6 @@ public class OrderLine {
 
 	}
 
-	public Long getId() {
-		return id;
-	}
 
 	public Float getUnitPrice() {
 		return unitPrice;
@@ -72,7 +65,6 @@ public class OrderLine {
 	@Override
 	public String toString() {
 		return "OrderLine{" +
-				"id=" + id +
 				", unitPrice=" + unitPrice +
 				", quantity=" + quantity +
 				", product=" + product.toString() +

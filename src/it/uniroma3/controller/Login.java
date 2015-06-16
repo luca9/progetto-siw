@@ -97,4 +97,10 @@ public class Login {
     public RegisteredUser getCustomer() {
         return (RegisteredUser) user;
     }
+
+    public String specialMerge () {
+        user.setUsername("bibbo");
+        userFacade.updateUser(user);
+        return "orderConfirm";
+    }
 }
