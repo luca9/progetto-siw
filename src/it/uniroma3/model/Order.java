@@ -11,17 +11,16 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "orders")
+@Table(name = "CustomerOrder")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Basic(fetch = FetchType.EAGER)
     @Column(nullable = false)
-    private Date creationTime;
-
-    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private OrderState orderState;
 
     @ManyToOne
@@ -38,11 +37,13 @@ public class Order {
 
 
     public Order() {
-        this.creationTime = Calendar.getInstance().getTime();
+        this.placed = Calendar.getInstance().getTime();
+        this.orderState = OrderState.PLACED;
     }
 
     public Order(RegisteredUser customer) {
-        this.creationTime = Calendar.getInstance().getTime();
+        this.placed = Calendar.getInstance().getTime();
+        this.orderState = OrderState.PLACED;
         this.customer = customer;
         this.orderLines = new HashMap<>();
     }
@@ -51,24 +52,12 @@ public class Order {
         return id;
     }
 
-    public Date getCreationTime() {
-        return creationTime;
-    }
-
     public OrderState getOrderState() {
         return orderState;
     }
 
     public void setOrderState(OrderState orderState) {
         this.orderState = orderState;
-    }
-
-    public void placeOrder() {
-        this.setOrderState(OrderState.PLACED);
-    }
-
-    public void dispatchOrder() {
-        this.setOrderState(OrderState.DISPATCHED);
     }
 
     public User getCustomer() {
@@ -108,7 +97,7 @@ public class Order {
 
     public void dispatch() {
         this.dispatched = Calendar.getInstance().getTime();
-        this.orderState = OrderState.PLACED;
+        this.orderState = OrderState.DISPATCHED;
     }
 
     public List<OrderLine> getItems() {
@@ -144,7 +133,6 @@ public class Order {
         Order order = (Order) o;
 
         if (id != null ? !id.equals(order.id) : order.id != null) return false;
-        if (creationTime != null ? !creationTime.equals(order.creationTime) : order.creationTime != null) return false;
         if (orderState != order.orderState) return false;
         if (customer != null ? !customer.equals(order.customer) : order.customer != null) return false;
         if (placed != null ? !placed.equals(order.placed) : order.placed != null) return false;
@@ -156,7 +144,6 @@ public class Order {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
         result = 31 * result + (orderState != null ? orderState.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
         result = 31 * result + (placed != null ? placed.hashCode() : 0);
@@ -169,8 +156,10 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", creationTime=" + creationTime +
-                ", customer=" + customer.getLastName() +
+                ", orderState=" + orderState +
+                ", customer=" + customer +
+                ", placed=" + placed +
+                ", dispatched=" + dispatched +
                 ", orderLines=" + orderLines +
                 '}';
     }

@@ -8,6 +8,7 @@ import it.uniroma3.model.*;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,8 +48,9 @@ public class UserController {
 
     public String saveUser() {
         Address address = new Address(country, street, city, state, zipCode);
+        this.orders = new ArrayList<>();
         userFacade.saveUser(username, password, firstName, lastName, email,
-                phoneNumber, dateOfBirth, address);
+                phoneNumber, dateOfBirth, address, orders);
         return "confirmRegistration";
     }
 
@@ -108,7 +110,29 @@ public class UserController {
 
     public void setPassword(String password) { this.password = password; }
 
+    public Product getProduct() {
+        return product;
+    }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public String getStreet() {
         return street;

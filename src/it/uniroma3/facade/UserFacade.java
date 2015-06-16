@@ -30,9 +30,9 @@ public class UserFacade {
 
     public RegisteredUser saveUser
             (String username, String password, String firstName, String lastName, String email,
-             String phoneNumber, Date dateOfBirth, Address address) {
+             String phoneNumber, Date dateOfBirth, Address address, List<Order> orders) {
         RegisteredUser user = new RegisteredUser(username, password, firstName, lastName, email,
-                phoneNumber, dateOfBirth, address, null);
+                phoneNumber, dateOfBirth, address, orders);
         em.persist(user);
         return user;
     }
@@ -66,7 +66,8 @@ public class UserFacade {
     }
 
      public void updateUser (User user) {
-        this.em.merge(user);
+        em.flush();
+        em.merge(user);
     }
 
     public void deleteUser (Long id) {

@@ -8,9 +8,9 @@ import java.util.*;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "SystemUser")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "usergroup")
+@DiscriminatorColumn(name = "userGroup")
 public abstract class User {
 
     @Id
@@ -41,11 +41,11 @@ public abstract class User {
     private String phoneNumber;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     private Date registrationDate;
 
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -154,20 +154,59 @@ public abstract class User {
         this.address = address;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
 
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("it.uniroma3.model.User");
-        sb.append("{id=").append(id);
-        sb.append(", firstName='").append(firstName);
-        sb.append(", lastName='").append(lastName);
-        sb.append("', email=").append(email);
-        sb.append("', phoneNumber=").append(phoneNumber);
-        sb.append(", dateOfBirth='").append(dateOfBirth);
-        sb.append("', address='").append(address);
-        sb.append("'}\n");
-        return sb.toString();
+        User user = (User) o;
+
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (userGroup != user.userGroup) return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
+        if (dateOfBirth != null ? !dateOfBirth.equals(user.dateOfBirth) : user.dateOfBirth != null) return false;
+        if (registrationDate != null ? !registrationDate.equals(user.registrationDate) : user.registrationDate != null)
+            return false;
+        return !(address != null ? !address.equals(user.address) : user.address != null);
+
     }
 
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (userGroup != null ? userGroup.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
+        result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userGroup=" + userGroup +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", registrationDate=" + registrationDate +
+                ", address=" + address +
+                '}';
+    }
 }
 

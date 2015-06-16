@@ -99,11 +99,21 @@ public class RegisteredUserController {
         this.orderFacade = orderFacade;
     }
 
-    public String dispatchOrder() {
+    public String dispatchOrder() throws Exception {
         this.currentOrder.dispatch();
-        this.currentCustomer.addOrder(this.currentOrder);
-        this.userFacade.updateUser(this.currentCustomer);
-        return "confirmation";
+        try {
+            this.currentCustomer.addOrder(this.currentOrder);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            this.userFacade.updateUser(this.currentCustomer);
+        }
+        catch (Exception r) {
+            r.printStackTrace();
+        }
+        return "orderConfirm";
     }
 
     public RegisteredUser getCurrentCustomer() {
@@ -137,6 +147,7 @@ public class RegisteredUserController {
     }
 
     public String createOrder() {
+        this.currentCustomer = login.getCustomer();
         this.currentOrder = new Order(currentCustomer);
         return "insertOrder";
     }
@@ -164,14 +175,14 @@ public class RegisteredUserController {
         this.currentCustomer = login.getCustomer();
     }
 
-    public void closeCart() {
+    public void closeCart() throws Exception{
         this.currentOrder = cart;
         dispatchOrder();
     }
 
     public String addToOrder() throws Exception {
         Product p = this.productFacade.getProduct(productCode);
-        if (p != null){
+        if (p != null) {
             this.currentOrder.addProduct(quantity, p);
         }
             return "insertOrder";

@@ -3,6 +3,7 @@ package it.uniroma3.model;
 import it.uniroma3.enums.UserGroup;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +40,16 @@ public class RegisteredUser extends User {
     }
 
     public void addOrder(Order o) {
+
         this.orders.add(o);
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
+        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
     }
 
 }
