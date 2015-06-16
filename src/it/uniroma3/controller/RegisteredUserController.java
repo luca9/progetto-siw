@@ -25,7 +25,6 @@ public class RegisteredUserController {
     private Order order;
     private Cart cart;
     private Order currentOrder;
-    private List <Order> orders = new ArrayList<>();
 
     @EJB(name = "order")
     private OrderFacade orderFacade;
@@ -50,14 +49,6 @@ public class RegisteredUserController {
     public String getCartSize() {
         int size = (cart == null) ? 0 : cart.getSize();
         return (size == 0) ? "" : "(" + size + ")";
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 
     public String getProductCode() {
@@ -112,7 +103,6 @@ public class RegisteredUserController {
         this.currentOrder.dispatch();
         try {
             this.currentCustomer.addOrder(this.currentOrder);
-            this.orders.add(currentOrder);
         }
         catch (Exception e) {
             e.printStackTrace();
