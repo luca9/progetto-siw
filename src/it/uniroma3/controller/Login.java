@@ -98,9 +98,4 @@ public class Login {
         return (RegisteredUser) user;
     }
 
-    public String specialMerge () {
-        user.setUsername("bibbo");
-        userFacade.updateUser(user);
-        return "orderConfirm";
-    }
 }

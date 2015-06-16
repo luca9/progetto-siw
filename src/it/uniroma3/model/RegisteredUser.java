@@ -42,14 +42,6 @@ public class RegisteredUser extends User {
     public void addOrder(Order o) {
 
         this.orders.add(o);
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
-        System.out.println("DIOCANEEEEEEEEEEEEEEEE");
     }
 
 }

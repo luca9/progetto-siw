@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
@@ -21,10 +22,10 @@ import java.util.List;
 public class RegisteredUserController {
     @ManagedProperty(value = "#{login.user}")
     private RegisteredUser currentCustomer;
-    private List<Order> orders;
     private Order order;
     private Cart cart;
     private Order currentOrder;
+    private List <Order> orders = new ArrayList<>();
 
     @EJB(name = "order")
     private OrderFacade orderFacade;
@@ -49,6 +50,14 @@ public class RegisteredUserController {
     public String getCartSize() {
         int size = (cart == null) ? 0 : cart.getSize();
         return (size == 0) ? "" : "(" + size + ")";
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public String getProductCode() {
@@ -103,17 +112,19 @@ public class RegisteredUserController {
         this.currentOrder.dispatch();
         try {
             this.currentCustomer.addOrder(this.currentOrder);
+            this.orders.add(currentOrder);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(currentCustomer.getOrders());
         try {
             this.userFacade.updateUser(this.currentCustomer);
         }
         catch (Exception r) {
             r.printStackTrace();
         }
-        return "orderConfirm";
+        return "myOrders";
     }
 
     public RegisteredUser getCurrentCustomer() {
@@ -132,14 +143,6 @@ public class RegisteredUserController {
         this.order = order;
     }
 
-    public String getOrders() {
-        this.orders = this.currentCustomer.getOrders();
-        return "myOrders";
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 
     public String findOrder(Long orderID) {
         this.order = this.orderFacade.getOrder(orderID);
