@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<body>
+<f:view>
+    <h1>Orders</h1>
+    <h:form>
+        <table>
+            <tr>
+                <th>Placed</th>
+                <th>Dispatched</th>
+            </tr>
+            <ui:repeat var="o" value="#{registeredUserController.currentCustomer.orders}">
+                <tr>
+                    <td>${o.placed}</td>
+                    <td>${o.dispatched}</td>
+                    <td>${o.id}</td>
+                </tr>
+            </ui:repeat>
+        </table>
+    </h:form>
+</f:view>
+
+
+
+
+
+
+
+</body>
+</html>
