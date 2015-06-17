@@ -7,6 +7,7 @@ import it.uniroma3.enums.OrderState;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Product;
+import it.uniroma3.model.RegisteredUser;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,6 +39,18 @@ public class OrderFacade {
     	return order;
     }
 
+    public List<Order> getCustomerOrders (RegisteredUser customer) throws Exception {
+        List<Order> orders = null;
+        try {
+            orders = em.createQuery("select o from Order o " +
+                    "where o.customer=:customer", Order.class)
+                    .setParameter("customer", customer).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
     public Order getOrder(Long id) {
     	return em.find(Order.class, id);
     }
@@ -46,21 +59,21 @@ public class OrderFacade {
     	em.merge(o);
     }
 
-    public Order placeOrder(Long orderID) {
-        Order o = this.getOrder(orderID);
-        for (OrderLine ol : o.getOrderLines().values()) {
-            Product p = ol.getProduct();
-            if (ol.getQuantity() > p.getInStock()) {
-                em.refresh(o);
-                return null;
-            }
-            p.setInStock(p.getInStock() - ol.getQuantity());
-        }
-        o.setOrderState(OrderState.PLACED);
-        o.setDispatched(new Date());
-        em.merge(o);
-        return o;
-    }
+//    public Order placeOrder(Long orderID) {
+//        Order o = this.getOrder(orderID);
+//        for (OrderLine ol : o.getOrderLines().values()) {
+//            Product p = ol.getProduct();
+//            if (ol.getQuantity() > p.getInStock()) {
+//                em.refresh(o);
+//                return null;
+//            }
+//            p.setInStock(p.getInStock() - ol.getQuantity());
+//        }
+//        o.setOrderState(OrderState.PLACED);
+//        o.setDispatched(new Date());
+//        em.merge(o);
+//        return o;
+//    }
 
     public List getDispatchedOrders() {
         Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.orderState = " + OrderState.DISPATCHED);

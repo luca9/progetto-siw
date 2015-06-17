@@ -31,7 +31,7 @@ public class ProductFacade {
 	}
 
 	public Product getProduct(String code) {
-		return this.em.find(Product.class, code );
+		return this.em.find(Product.class, code);
 	}
 
 	public List<Product> getAllProducts() {

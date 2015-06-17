@@ -2,7 +2,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
-    <title>Product catalog</title>
+    <title>List of all products</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 
@@ -11,26 +11,23 @@
 </h:head>
 <body>
 <f:view>
-<h1>Products</h1>
-<h:form>
-    <table>
-    <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>In stock</th>
-    </tr>
-    <c:forEach var="p" items="#{productController.products}">
-        <tr>
-            <td><h:commandLink action="#{productController.findProduct(p.code)}" value="#{p.code}">
-            </h:commandLink></td>
-            <td>${p.name}</td>
-            <td>${p.price}</td>
-            <td>${p.inStock}</td>
-        </tr>
-    </c:forEach>
-</table>
-</h:form>
+    <h1>Order ${registeredUserController.order.id}</h1>
+    <h:form>
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+            <c:forEach var="ol" items="#{registeredUserController.order.orderLines.values}">
+                <tr>
+                    <td>${ol.product.name}</td>
+                    <td>${ol.quantity}</td>
+                    <td>${ol.subTotal}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </h:form>
 </f:view>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

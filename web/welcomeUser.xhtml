@@ -21,7 +21,7 @@
     <h:form>
         <h:commandLink action="#{productController.listProducts}" value="View available products"/>
         <br/>
-        <h:commandLink action="#{userController.listOrders}" value="My orders"/>
+        <h:commandLink action="#{registeredUserController.getCustomerOrders}" value="My orders"/>
         <br/>
         <h:commandLink action="#{registeredUserController.createOrder}" value="New order"/>
     </h:form>

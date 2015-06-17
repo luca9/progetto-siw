@@ -25,6 +25,7 @@ public class RegisteredUserController {
     private Order order;
     private Cart cart;
     private Order currentOrder;
+    private List <Order> orders;
 
     @EJB(name = "order")
     private OrderFacade orderFacade;
@@ -49,6 +50,14 @@ public class RegisteredUserController {
     public String getCartSize() {
         int size = (cart == null) ? 0 : cart.getSize();
         return (size == 0) ? "" : "(" + size + ")";
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public String getProductCode() {
@@ -107,14 +116,25 @@ public class RegisteredUserController {
         catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(currentCustomer.getOrders());
         try {
             this.userFacade.updateUser(this.currentCustomer);
         }
         catch (Exception r) {
             r.printStackTrace();
         }
+        return "confirmOrder";
+    }
+
+    public String getCustomerOrders () {
+        this.orders = currentCustomer.getOrders();
+        findOrder(1101L);
+        System.out.println(order);
         return "myOrders";
+    }
+
+    public String findOrder (Long id) {
+        this.order = orderFacade.getOrder(id);
+        return "order";
     }
 
     public RegisteredUser getCurrentCustomer() {
@@ -134,10 +154,6 @@ public class RegisteredUserController {
     }
 
 
-    public String findOrder(Long orderID) {
-        this.order = this.orderFacade.getOrder(orderID);
-        return "order";
-    }
 
     public String createOrder() {
         this.currentCustomer = login.getCustomer();

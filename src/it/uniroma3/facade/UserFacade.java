@@ -42,10 +42,6 @@ public class UserFacade {
                 RegisteredUser.class).getResultList();
     }
 
-    public List <Order> getAllOrder() {
-        return em.createQuery("select o from Order o", Order.class).getResultList();
-    }
-
     public User getUser (Long id) {
         return em.find(User.class, id);
     }

@@ -60,7 +60,7 @@ public class Order {
         this.orderState = orderState;
     }
 
-    public User getCustomer() {
+    public RegisteredUser getCustomer() {
         return customer;
     }
 

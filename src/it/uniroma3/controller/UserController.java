@@ -54,11 +54,6 @@ public class UserController {
         return "confirmRegistration";
     }
 
-    public String listOrders() {
-        this.orders = this.userFacade.getAllOrder();
-        return "MyOrders";
-    }
-
 
     public UserFacade getUserFacade() {
         return userFacade;
