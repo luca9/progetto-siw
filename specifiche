@@ -1,0 +1,87 @@
+Requisiti
+
+Caso d'uso UC1: consulta listino
+
+- Attore primario: utente non registrato
+- Scenario principale di successo:
+	1.  L'utente consulta il catalogo dei prodotti
+	2.  L'utente sceglie un prodotto e ne richiede i dettagli
+	3.  Il sistema mostra i dettagli del prodotto scelto
+	4.  L'utente ripete i passi precedenti un numero indefinito di volte
+
+- Estensioni
+	1a.  L'utente usa il sistema per cercare nel catalogo dei prodotti
+
+
+
+Caso d'uso UC2: effettua ordine
+
+- Attore primario: cliente (utente registrato)
+- Scenario principale di successo:
+	1.  Il cliente crea un ordine
+	2.  Il cliente consulta il catalogo dei prodotti
+	3.  Il cliente sceglie un prodotto e aggiunge codice e quantità del prodotto scelto all'ordine
+	4.  Il sistema imposta il prezzo unitario del prodotto scelto al prezzo corrente di listino
+	5.  Il sistema registra la riga ordine
+	6.  Il cliente ripete i due passi precedenti finché necessario
+	7.  Il cliente "chiude" l'ordine
+	8.  Il sistema registra l'ordine
+
+- Precondizioni:
+	Il cliente è identificato e autenticato
+
+
+
+Caso d'uso UC3: consulta i propri ordini
+
+- Attore primario: cliente
+- Scenario principale:
+	1.  Il cliente consulta l'elenco dei propri ordini
+	2.  Il sistema mostra al cliente l'elenco dei suoi ordini
+	3.  Il cliente chiede il dettaglio di un ordine
+	4.  Il sistema mostra il dettaglio dell'ordine
+	5.  Il cliente ripete i due passi precedenti finché necessario
+
+- Precondizioni:
+	Il cliente è identificato e autenticato
+
+
+
+Caso d'uso UC4: inserimento prodotti nel catalogo
+
+- Attore primario: amministrazione
+- Scenario principale:
+	1.  L'amministratore inserisce un nuovo prodotto nel catalogo specificandone i dettagli
+	2.  Il sistema verifica la correttezza dei dati e registra il prodotto
+	3.  I punti precedenti vengono ripetuti fino a che necessario
+
+- Precondizioni:
+	L'amministratore è identificato e autenticato
+
+- Eccezioni
+	2a.  L'amministratore inserisce dei dati non corretti. Il sistema mostra un messaggio di errore
+
+
+Caso d'uso UC7: login
+
+- Attore primario: utente registrato (amministratore o cliente)
+- Scenario principale:
+	1.  L’utente inserisce il suo indirizzo di posta elettronica e la sua password.
+	2.  Il sistema verifica la correttezza dei dati immessi, e autentica l’utente.
+	3.  Il sistema mostra all'utente la homepage
+
+- Eccezioni
+	2a.  L'utente inserisce dei dati non corretti. Il sistema mostra un messaggio di errore
+
+
+
+Caso d'uso UC8: registrazione cliente
+
+- Attore primario: utente non registrato
+- Scenario principale:
+	1.  L’utente inserisce i suoi dati (nome, cognome, email, data di nascita, nazione, strada, città, codice postale, nome utente e password) nel sistema.
+	2.  Il sistema verifica la correttezza dei dati immessi, e registra il cliente.
+	3.  Il sistema mostra all'utente una pagina di conferma
+
+- Eccezioni
+	2a.  L'utente inserisce dei dati non corretti. Il sistema mostra un messaggio di errore

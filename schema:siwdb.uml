@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>74c2d575-032c-4f77-9dcf-00417c47fc2e.schema:siwdb</OriginalElement>
+  <nodes>
+    <node x="0.0" y="502.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.OrderLines</node>
+    <node x="351.0" y="0.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.Address</node>
+    <node x="291.0" y="317.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.Provider</node>
+    <node x="0.0" y="686.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.Provider_Product</node>
+    <node x="0.0" y="317.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.Product</node>
+    <node x="0.0" y="0.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.SystemUser</node>
+    <node x="522.0" y="317.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.CustomerOrder</node>
+    <node x="286.0" y="502.0">74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.OPENJPA_SEQUENCE_TABLE</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.5558408215661104" x="354.0" y="379.5" />
+  <SelectedNodes>
+    <node>74c2d575-032c-4f77-9dcf-00417c47fc2e.table:siwdb.OrderLines</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
